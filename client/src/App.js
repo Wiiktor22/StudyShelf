@@ -1,9 +1,12 @@
 import React from 'react';
+import SingIn from './views/SingIn';
+import GlobalStyles from './themes/GlobalStyles';
 
 const App = () => {
     return ( 
         <>
-            <h1>React</h1>
+            <GlobalStyles />
+            <SingIn />
         </>
     );
 }
