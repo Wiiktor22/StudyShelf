@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
 const { check, validationResult } = require('express-validator');
+const checkObjectId = require('../middleware/checkObjectId');
 
 const UserData = require('../models/UserData');
 
@@ -30,6 +31,19 @@ router.post('/', auth, async (req, res) => {
         res.status(500).send('Server error');
     }
 });
+
+// @route   GET api/userdata/:id
+// @desc    Get user data storage
+// @access  Private
+router.get('/', auth, async (req, res) => {
+    try {
+        const data = await UserData.findOne({ userId: req.user.id});
+        res.json(data);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send('Server Error');
+    }
+})
 
 // @route   POST api/userdata/note
 // @desc    Create note
@@ -62,8 +76,8 @@ router.put('/note', [
     }
 })
 
-// @route   POST api/userdata/note
-// @desc    Create note
+// @route   DELETE api/userdata/note
+// @desc    Delete note
 // @access  Private
 router.delete('/note/:id', auth, async (req, res) => {
     try {

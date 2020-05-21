@@ -1,4 +1,4 @@
-import { CREATE_DATA_SUCCESS, CREATE_DATA_ERROR } from '../actions/types';
+import { CREATE_DATA_SUCCESS, CREATE_DATA_ERROR, GET_DATA_ERROR, GET_DATA_SUCCESS } from '../actions/types';
 
 const initialState = {
     userId: null,
@@ -17,7 +17,17 @@ export default function(state = initialState, action) {
                 userId: payload,
                 isLoading: false
             }
+        case GET_DATA_SUCCESS:
+            const { userId, notes, links } = payload;
+            return {
+                ...state,
+                userId,
+                notes,
+                links,
+                isLoading: false
+            }
         case CREATE_DATA_ERROR:
+        case GET_DATA_ERROR:
             return {
                 ...state,
                 userId: null,

@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { Input, Label } from '../atoms/Input';
 import { theme } from '../../themes/StylesVariables';
 import Button from '../atoms/Button';
+import { connect } from 'react-redux';
+import { login } from '../../redux/actions/auth';
 
 const Wrapper = styled.div`
     display: flex;
@@ -44,7 +46,7 @@ const ChangeModeBtn = styled.button`
     font-weight: 600;
 `;
 
-const LogIn = ({ toggle }) => {
+const LogIn = ({ toggle, login }) => {
     const [formData, setFormData] = useState({
         email: "",
         password: ""
@@ -56,6 +58,7 @@ const LogIn = ({ toggle }) => {
     const { email, password } = formData;
     const handleSubmit = e => {
         e.preventDefault();
+        login(email, password);
     }
 
     return ( 
@@ -73,4 +76,4 @@ const LogIn = ({ toggle }) => {
     );
 }
  
-export default LogIn;
+export default connect(null, { login })(LogIn);
