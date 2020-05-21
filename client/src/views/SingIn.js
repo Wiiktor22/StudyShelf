@@ -4,6 +4,8 @@ import { theme } from '../themes/StylesVariables';
 import FrontPageInfo from '../components/organisms/FrontPageInfo';
 import LogIn from '../components/organisms/LogIn';
 import SignUp from '../components/organisms/Register';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 const Wrapper = styled.div`
     display: grid;
@@ -27,11 +29,12 @@ const Section = styled.div`
     )}
 `;
 
-const SingIn = () => {
+const SingIn = ({ isAuthenticated }) => {
     const [showRegister, setShowRegister] = useState(false);
     const toggle = () => {
         setShowRegister(!showRegister);
     }
+    if (isAuthenticated) { return <Redirect to='/notes' /> }
     return ( 
         <Wrapper>
             <Section left>
@@ -43,5 +46,9 @@ const SingIn = () => {
         </Wrapper>
     );
 }
+
+const mapStateToProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated
+})
  
-export default SingIn;
+export default connect(mapStateToProps)(SingIn);
