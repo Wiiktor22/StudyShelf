@@ -8,3 +8,4 @@ export const CREATE_DATA_SUCCESS = 'CREATE_DATA_SUCCESS';
 export const CREATE_DATA_ERROR = 'CREATE_DATA_ERROR';
 export const GET_DATA_SUCCESS = 'GET_DATA_SUCCESS';
 export const GET_DATA_ERROR = 'GET_DATA_ERROR';
+export const LOG_OUT = 'LOG_OUT';

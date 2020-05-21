@@ -6,25 +6,42 @@ import setAuthToken from './redux/setAutkToken';
 import { useEffect } from 'react';
 import { loadUser } from './redux/actions/auth';
 import { store } from './index';
+import { connect } from 'react-redux';
+import Loading from './views/Loading';
+import MainWrapper from './components/molecules/MainWrapper';
+import Notes from './views/Notes';
 
 if (localStorage.token) {
     setAuthToken(localStorage.token);
 }
 
-const App = () => {
+const App = ({ isLoading }) => {
     useEffect(() => {
         store.dispatch(loadUser());
     }, [])
     
+    const showLoading = () => { return <Loading /> };
+    const showContent = () => {
+        return (
+            <Switch>
+                <Route exact path='/' component={SingIn} />
+                <MainWrapper>
+                    <Route path='/notes' component={Notes} />
+                </MainWrapper>
+            </Switch>
+        )
+    }
+    
     return (
         <BrowserRouter>
             <GlobalStyles />
-            <Switch>
-                <Route path='/' component={SingIn} />
-                <Route path='/notes' component={SingIn} />
-            </Switch>
+            {isLoading ? showLoading() : showContent()}
         </BrowserRouter>
     );
 }
+
+const mapStateToProps = state => ({
+    isLoading: state.auth.isLoading
+})
  
-export default App;
+export default connect(mapStateToProps)(App);
