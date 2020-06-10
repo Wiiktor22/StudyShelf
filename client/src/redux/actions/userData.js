@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CREATE_DATA_SUCCESS, CREATE_DATA_ERROR, GET_DATA_SUCCESS, GET_DATA_ERROR } from '../actions/types';
+import { CREATE_DATA_SUCCESS, CREATE_DATA_ERROR, GET_DATA_SUCCESS, GET_DATA_ERROR, CREATE_NOTE_SUCCESS, CREATE_NOTE_ERROR } from '../actions/types';
 
 export const createUserData = () => async dispatch => {
     try {
@@ -26,6 +26,29 @@ export const getUserData = () => async dispatch => {
     } catch (error) {
         dispatch({
             type: GET_DATA_ERROR
+        })
+    }
+}
+
+export const addNewNote = newNote => async dispatch => {
+    const config = {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+    };
+    
+    try {
+        const res = await axios.put('/api/userdata/note', newNote, config);
+        console.log(res)
+
+        dispatch({
+            type: CREATE_NOTE_SUCCESS,
+            payload: res.data
+        })
+    } catch (error) {
+        console.log(error);
+        dispatch({
+            type: CREATE_NOTE_ERROR
         })
     }
 }

@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { theme } from '../../themes/StylesVariables';
 import Logo from '../atoms/Logo';
+import MyLink from '../atoms/NavLink';
+import NotesIcon from '../../assets/NavLinks/notes.png';
 
 const Wrapper = styled.nav`
     display: flex;
@@ -20,6 +22,7 @@ const Nav = () => {
     return ( 
         <Wrapper>
             <Logo nav>StudyShelf</Logo>
+            <MyLink component="notes" name="notes" icon={NotesIcon}/>
         </Wrapper>
     );
 }

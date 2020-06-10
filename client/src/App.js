@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import Loading from './views/Loading';
 import MainWrapper from './components/molecules/MainWrapper';
 import Notes from './views/Notes';
+import { getUserData } from './redux/actions/userData';
 
 if (localStorage.token) {
     setAuthToken(localStorage.token);
@@ -18,6 +19,7 @@ if (localStorage.token) {
 const App = ({ isLoading }) => {
     useEffect(() => {
         store.dispatch(loadUser());
+        store.dispatch(getUserData());
     }, [])
     
     const showLoading = () => { return <Loading /> };
@@ -41,7 +43,7 @@ const App = ({ isLoading }) => {
 }
 
 const mapStateToProps = state => ({
-    isLoading: state.auth.isLoading
+    isLoading: state.userData.isLoading
 })
  
 export default connect(mapStateToProps)(App);

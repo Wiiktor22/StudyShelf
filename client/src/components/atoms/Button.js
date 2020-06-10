@@ -1,11 +1,10 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { theme } from '../../themes/StylesVariables';
 
 const Button = styled.button`
     background-color: ${theme.main};
-    color: ${theme.yellow};
+    color: white;
     border-radius: 5px;
-    margin-top: 3vh;
     font-family: 'Montserrat', sans-serif;
     font-size: 1.4rem;
     font-weight: 600;
@@ -13,10 +12,20 @@ const Button = styled.button`
     width: 180px;
     transition: .4s;
 
-    :hover {
-        background-color: ${theme.yellow};
-        color: ${theme.main};
-    }
+    ${({ notes }) => (
+        notes && css`
+            border-radius: 15px;
+        `
+    )}
+
+    ${({ note }) => (
+        note && css`
+            border-radius: 15px;
+            width: 100px;
+            font-size: 1.1rem;
+            padding: 4px 0;
+        `
+    )}
 `;
 
 export default Button;
