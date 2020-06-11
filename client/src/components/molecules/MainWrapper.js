@@ -7,7 +7,7 @@ import { Redirect } from 'react-router-dom';
 
 const Wrapper = styled.div`
     position: relative;
-    min-height: 100vh;
+    min-height: 90vh;
     margin-left: 200px;
 `;
 

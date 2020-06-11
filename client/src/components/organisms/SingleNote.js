@@ -2,21 +2,29 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { theme } from '../../themes/StylesVariables';
 import Button from '../atoms/Button';
+import trashIcon from '../../assets/trashIcon.svg';
+import { connect } from 'react-redux';
+import { deleteNote } from '../../redux/actions/userData';
 
 const NoteWrapper = styled.div`
     position: relative;
     width: 25vw;
     height: 30vh;
-    background-color: white;
+    background-color: #fafafa;
     border-radius: 10px;
+    box-shadow: 0 0 10px rgba(33,33,33, .1);
     padding: 2vh 1vw;
+
+    :hover {
+        box-shadow: 0 0 10px rgba(33,33,33, .2);
+    }
 `;
 
 const Header = styled.h4`
     color: ${theme.main};
     font-size: 2rem;
     margin-bottom: 3vh;
-    font-family: 'Fredoka One', cursive;
+    font-weight: 600;
 `;
 
 const DownMenu = styled.div`
@@ -26,6 +34,7 @@ const DownMenu = styled.div`
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    width: 100%;
 `;
 
 const Content = styled.p`
@@ -40,18 +49,40 @@ const Content = styled.p`
     )}
 `;
 
-const SingleNote = ({ title, content, date}) => {
+const Icon = styled.img`
+    position: absolute;
+    top: 50%;
+    right: 2vw;
+    transform: translateY(-50%);
+    width: 22px;
+    height: 22px;
+    transition: .2s;
+    cursor: pointer;
+`;
+
+const SingleNote = ({ title, content, date, id, deleteMode, deleteNote, hideDeleteMode, switchRead, switchForm, selectNote }) => {
+    const handleClick = id => {
+        switchRead();
+        selectNote(id);
+        switchForm();
+    }
+    
+    const handleDelete = id => {
+        deleteNote(id);
+        hideDeleteMode();
+    }
+    
     return ( 
         <NoteWrapper>
             <Header>{title}</Header>
             <Content>{content}</Content>
             <DownMenu>
-                <Button note>read more...</Button>
-                {console.log(date)}
+                <Button note onClick={() => handleClick(id)}>read more...</Button>
                 <Content date>{date.slice(0, 10)}</Content>
+                {deleteMode && <Icon src={trashIcon} onClick={() => handleDelete(id)}/>}
             </DownMenu>
         </NoteWrapper>
     );
 }
  
-export default SingleNote;
+export default connect(null, { deleteNote })(SingleNote);

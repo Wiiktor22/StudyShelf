@@ -6,12 +6,17 @@ import { logout } from '../../redux/actions/auth';
 import { useLocation } from 'react-router-dom';
 
 const Wrapper = styled.header`
+    position: fixed;
+    left: 200px;
+    right: 0;
+    top: 0;
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    position: relative;
     height: 6vh;
-    width: 100%;
+    box-shadow: 1px 2px 18px rgba(0,0,0,.1);
+    background-color: white;
+    z-index: 9;
 `;
 
 const Button = styled.button`

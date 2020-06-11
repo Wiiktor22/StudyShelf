@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CREATE_DATA_SUCCESS, CREATE_DATA_ERROR, GET_DATA_SUCCESS, GET_DATA_ERROR, CREATE_NOTE_SUCCESS, CREATE_NOTE_ERROR } from '../actions/types';
+import { CREATE_DATA_SUCCESS, CREATE_DATA_ERROR, GET_DATA_SUCCESS, GET_DATA_ERROR, CREATE_NOTE_SUCCESS, CREATE_NOTE_ERROR, DELETE_NOTE_SUCCESS, DELETE_NOTE_ERROR } from '../actions/types';
 
 export const createUserData = () => async dispatch => {
     try {
@@ -39,16 +39,29 @@ export const addNewNote = newNote => async dispatch => {
     
     try {
         const res = await axios.put('/api/userdata/note', newNote, config);
-        console.log(res)
-
         dispatch({
             type: CREATE_NOTE_SUCCESS,
-            payload: res.data
+            payload: res.data.notes[0]
         })
     } catch (error) {
         console.log(error);
         dispatch({
             type: CREATE_NOTE_ERROR
+        })
+    }
+}
+
+export const deleteNote = id => async dispatch => {
+    try {
+        await axios.delete(`/api/userdata/note/${id}`)
+
+        dispatch({
+            type: DELETE_NOTE_SUCCESS,
+            payload: id
+        })
+    } catch (error) {
+        dispatch({
+            type: DELETE_NOTE_ERROR
         })
     }
 }
