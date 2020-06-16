@@ -31,12 +31,16 @@ const UserDataSchema = new mongoose.Schema({
                 type: String,
                 required: true
             },
+            category: {
+                type: String,
+                required: true
+            },
             description: {
                 type: String,
             },
-            priority: {
-                type: Number,
-                required: true
+            date: {
+                type: Date,
+                default: Date.now
             }
 
         }

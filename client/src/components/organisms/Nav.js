@@ -4,6 +4,7 @@ import { theme } from '../../themes/StylesVariables';
 import Logo from '../atoms/Logo';
 import MyLink from '../atoms/NavLink';
 import NotesIcon from '../../assets/NavLinks/notes.png';
+import SitesIcon from '../../assets/NavLinks/sites.png';
 
 const Wrapper = styled.nav`
     display: flex;
@@ -22,7 +23,8 @@ const Nav = () => {
     return ( 
         <Wrapper>
             <Logo nav>StudyShelf</Logo>
-            <MyLink component="notes" name="notes" icon={NotesIcon}/>
+            <MyLink component="notes" name="notes" icon={NotesIcon} />
+            <MyLink component="sites" name="sites" icon={SitesIcon} />
         </Wrapper>
     );
 }

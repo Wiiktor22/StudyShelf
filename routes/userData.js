@@ -45,7 +45,7 @@ router.get('/', auth, async (req, res) => {
     }
 })
 
-// @route   POST api/userdata/note
+// @route   PUT api/userdata/note
 // @desc    Create note
 // @access  Private
 router.put('/note', [
@@ -71,12 +71,11 @@ router.put('/note', [
 
         res.json(userDataStorage);
     } catch (error) {
-        console.error(error.message);
         res.status(500).send('Server error');
     }
 })
 
-// @route   DELETE api/userdata/note
+// @route   DELETE api/userdata/note:id
 // @desc    Delete note
 // @access  Private
 router.delete('/note/:id', auth, async (req, res) => {
@@ -84,6 +83,54 @@ router.delete('/note/:id', auth, async (req, res) => {
         const userDataStorage = await UserData.findOne({ userId: req.user.id });
 
         userDataStorage.notes = userDataStorage.notes.filter(note => note._id.toString() !== req.params.id);
+        await userDataStorage.save();
+        return res.status(200).json(userDataStorage);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send('Server error');
+    }
+})
+
+// @route   PUT api/userdata/link
+// @desc    Create new link
+// @access  Private
+router.put('/link', [
+    auth,
+    [
+        check('link', 'Link is required').not().isEmpty(),
+        check('title', 'Title is required').not().isEmpty(),
+        check('category', 'Category is required').not().isEmpty()
+    ]
+], async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { link, title, category, description } = req.body;
+    const newSite = { link, title, category, description};
+
+    try {
+        const userDataStorage = await UserData.findOne({ userId: req.user.id });
+
+        userDataStorage.links.unshift(newSite);
+        await userDataStorage.save();
+
+        res.json(userDataStorage);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server error');
+    }
+})
+
+// @route   DELETE api/userdata/link:id
+// @desc    Delete saved sites
+// @access  Private
+router.delete('/link/:id', auth, async (req, res) => {
+    try {
+        const userDataStorage = await UserData.findOne({ userId: req.user.id });
+
+        userDataStorage.links = userDataStorage.links.filter(note => note._id.toString() !== req.params.id);
         await userDataStorage.save();
         return res.status(200).json(userDataStorage);
     } catch (error) {

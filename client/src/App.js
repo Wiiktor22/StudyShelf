@@ -11,6 +11,7 @@ import Loading from './views/Loading';
 import MainWrapper from './components/molecules/MainWrapper';
 import Notes from './views/Notes';
 import { getUserData } from './redux/actions/userData';
+import Sites from './views/Sites';
 
 if (localStorage.token) {
     setAuthToken(localStorage.token);
@@ -29,6 +30,7 @@ const App = ({ isLoading }) => {
                 <Route exact path='/' component={SingIn} />
                 <MainWrapper>
                     <Route path='/notes' component={Notes} />
+                    <Route path='/sites' component={Sites} />
                 </MainWrapper>
             </Switch>
         )
