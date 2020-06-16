@@ -26,6 +26,13 @@ const Button = styled.button`
             padding: 4px 0;
         `
     )}
+
+    ${({ sites }) => (
+        sites && css`
+            border-radius: 15px;
+            margin-right: 3vw;
+        `
+    )}
 `;
 
 export default Button;

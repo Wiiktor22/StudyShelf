@@ -5,6 +5,7 @@ import Button from '../components/atoms/Button';
 import { connect } from 'react-redux';
 import SingleNote from '../components/organisms/SingleNote';
 import ShowNoteWindow from '../components/organisms/ShowNoteWindow';
+import CheckBox from '../components/atoms/CheckBox';
 
 const ContentWrapper = styled.div`
     position: relative;
@@ -39,12 +40,6 @@ const NotesWrapper = styled.div`
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 5vh 3vw;
     padding: 14vh 4vw 2vh;
-`;
-
-const CheckBox = styled.input`
-    :checked {
-        background-color: ${theme.main};
-    }
 `;
 
 const Label = styled.label`

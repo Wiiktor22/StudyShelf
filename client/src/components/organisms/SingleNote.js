@@ -10,7 +10,7 @@ const NoteWrapper = styled.div`
     position: relative;
     width: 25vw;
     height: 30vh;
-    background-color: #fafafa;
+    background-color: ${theme.greyBackground};
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(33,33,33, .1);
     padding: 2vh 1vw;
