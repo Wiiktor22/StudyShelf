@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CREATE_DATA_SUCCESS, CREATE_DATA_ERROR, GET_DATA_SUCCESS, GET_DATA_ERROR, CREATE_NOTE_SUCCESS, CREATE_NOTE_ERROR, DELETE_NOTE_SUCCESS, DELETE_NOTE_ERROR } from '../actions/types';
+import { CREATE_DATA_SUCCESS, CREATE_DATA_ERROR, GET_DATA_SUCCESS, GET_DATA_ERROR, CREATE_NOTE_SUCCESS, CREATE_NOTE_ERROR, DELETE_NOTE_SUCCESS, DELETE_NOTE_ERROR, CREATE_LINK_SUCCESS, CREATE_LINK_ERROR, DELETE_LINK_ERROR, DELETE_LINK_SUCCESS } from '../actions/types';
 
 export const createUserData = () => async dispatch => {
     try {
@@ -62,6 +62,41 @@ export const deleteNote = id => async dispatch => {
     } catch (error) {
         dispatch({
             type: DELETE_NOTE_ERROR
+        })
+    }
+}
+
+export const addNewLink = newLink => async dispatch => {
+    const config = {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+    };
+    
+    try {
+        const res = await axios.put('/api/userdata/link', newLink, config);
+        dispatch({
+            type: CREATE_LINK_SUCCESS,
+            payload: res.data.links[0]
+        })
+    } catch (error) {
+        dispatch({
+            type: CREATE_LINK_ERROR
+        })
+    }
+}
+
+export const deleteLink = id => async dispatch => {
+    try {
+        await axios.delete(`/api/userdata/link/${id}`)
+
+        dispatch({
+            type: DELETE_LINK_SUCCESS,
+            payload: id
+        })
+    } catch (error) {
+        dispatch({
+            type: DELETE_LINK_ERROR
         })
     }
 }

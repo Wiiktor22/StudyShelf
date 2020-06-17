@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import Button from '../components/atoms/Button';
 import CheckBox from '../components/atoms/CheckBox';
 import CategoryWrapper from '../components/molecules/CategoryContainer';
+import { useState } from 'react';
+import AddNewSite from '../components/organisms/AddNewSite';
+import { Animated } from 'react-animated-css';
 
 const ContentWrapper = styled.div`
     position: relative;
@@ -37,19 +40,38 @@ const GridWrapper = styled.div`
 `;
 
 const Sites = () => {
+    const [formIsOpen, setFormIsOpen] = useState(false);
+    const switchForm = () => setFormIsOpen(!formIsOpen);
+    const animationTime = 1000;
+
+    const [deleteMode, setDeleteMode] = useState(false);
+    const hideDeleteMode = () => setDeleteMode(false);
+
     return ( 
         <ContentWrapper>
             <SitesHeader>
-                <Button sites>add site</Button>
-                <CheckBox id="delete" type="checkbox"></CheckBox>
-                <Label htmlfor="delete">Delete</Label>
+                <Button sites onClick={switchForm}>add site</Button>
+                <CheckBox id="delete" type="checkbox" onChange={() => setDeleteMode(!deleteMode)} checked={deleteMode}></CheckBox>
+                <Label htmlfor="delete">Read</Label>
             </SitesHeader>
-            <GridWrapper>   
-                <CategoryWrapper title="article"/>
-                <CategoryWrapper title="e-book"/>
-                <CategoryWrapper title="website"/>
-                <CategoryWrapper title="other"/>
+            <GridWrapper>
+            <Animated animationIn="bounceInDown" animationInDuration={animationTime} isVisible={true}> 
+                <CategoryWrapper title="article" deleteMode={deleteMode} hideDeleteMode={hideDeleteMode}/>
+            </Animated>
+            <Animated animationIn="bounceInDown" animationInDuration={animationTime} animationInDelay={animationTime / 2} isVisible={true}> 
+                <CategoryWrapper title="e-book" deleteMode={deleteMode} hideDeleteMode={hideDeleteMode}/>
+                </Animated>
+            <Animated animationIn="bounceInDown" animationInDuration={animationTime} animationInDelay={animationTime} isVisible={true}> 
+                <CategoryWrapper title="website" deleteMode={deleteMode} hideDeleteMode={hideDeleteMode}/>
+                </Animated>
+            <Animated animationIn="bounceInDown" animationInDuration={animationTime} animationInDelay={animationTime * 1.5} isVisible={true}> 
+                <CategoryWrapper title="other" deleteMode={deleteMode} hideDeleteMode={hideDeleteMode}/>
+                </Animated>
             </GridWrapper>
+            <AddNewSite 
+                isOpen={formIsOpen}
+                switchForm={switchForm}
+            />
         </ContentWrapper>
     );
 }

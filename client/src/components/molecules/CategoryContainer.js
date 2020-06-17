@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { theme } from '../../themes/StylesVariables';
 import { connect } from 'react-redux';
+import checkIcon from '../../assets/check.png';
+import { deleteLink } from '../../redux/actions/userData';
 
 const Wrapper = styled.div`
     position: relative;
@@ -9,10 +11,11 @@ const Wrapper = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    width: 80%;
+    width: 33vw;
     background-color: ${theme.greyBackground};
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(33,33,33, .1);
+    height: 100%;
 
     :hover {
         box-shadow: 0 0 10px rgba(33,33,33, .2);
@@ -53,6 +56,7 @@ const Links = styled.div`
 `;
 
 const SingleLink = styled.div`
+    position: relative;
     display: grid;
     grid-template-rows: 100%;
     grid-template-columns: 2fr 1fr;
@@ -74,9 +78,27 @@ const Text = styled.p`
     margin-top: ${({ empty }) => empty ? `2vh` : 0};
 `;
 
-const CategoryWrapper = ({ title, links }) => {
+const Icon = styled.img`
+    position: absolute;
+    top: 50%;
+    right: 1vw;
+    transform: translateY(-50%);
+    width: 22px;
+    height: 22px;
+    transition: .2s;
+    cursor: pointer;
+`;
+
+const CategoryWrapper = ({ title, links, deleteMode, hideDeleteMode, deleteLink }) => {
+    const [dame, forceUpdate] = useState(false);
     const filterArray = links.filter(link => link.category === title);
     const emptyText = `There is no ${title}s saved!`;
+
+    const handleDelete = id => {
+        deleteLink(id);
+        hideDeleteMode();
+        forceUpdate(!dame);
+    }
 
     const renderContect = () => {
         if(filterArray.length) {
@@ -86,6 +108,7 @@ const CategoryWrapper = ({ title, links }) => {
                         <SingleLink key={item._id}>
                             <LinkText link href={item.link} target="_blank">{item.title}</LinkText>
                             <Text>{item.date.slice(0, 10)}</Text>
+                            {deleteMode && <Icon src={checkIcon} onClick={() => handleDelete(item._id)}/>}
                         </SingleLink>
                     ))}
                 </>
@@ -111,4 +134,4 @@ const CategoryWrapper = ({ title, links }) => {
 const mapStateToProps = state => ({
     links: state.userData.links
 })
-export default connect(mapStateToProps)(CategoryWrapper);
+export default connect(mapStateToProps, { deleteLink })(CategoryWrapper);

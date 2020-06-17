@@ -107,8 +107,8 @@ router.put('/link', [
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { link, title, category, description } = req.body;
-    const newSite = { link, title, category, description};
+    const { link, title, category } = req.body;
+    const newSite = { link, title, category };
 
     try {
         const userDataStorage = await UserData.findOne({ userId: req.user.id });

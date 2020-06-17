@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import SingleNote from '../components/organisms/SingleNote';
 import ShowNoteWindow from '../components/organisms/ShowNoteWindow';
 import CheckBox from '../components/atoms/CheckBox';
+import { Animated } from 'react-animated-css';
 
 const ContentWrapper = styled.div`
     position: relative;
@@ -73,7 +74,8 @@ const Notes = ({ notes }) => {
     const [searchedValue, setSearchedValue] = useState('');
     const filterNotes = notes.filter(note => note.title.includes(searchedValue));
 
-    return ( 
+    return (
+        <Animated animationIn="bounceInDown" isVisible={true}>
         <ContentWrapper>
             <NotesHeader>
                 <Button notes onClick={handleAddButtonClick}>add note</Button>
@@ -106,6 +108,7 @@ const Notes = ({ notes }) => {
                 note={readenNote}
             />
         </ContentWrapper>
+        </Animated>
     );
 }
 

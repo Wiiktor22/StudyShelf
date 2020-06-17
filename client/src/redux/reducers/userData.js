@@ -1,4 +1,4 @@
-import { CREATE_DATA_SUCCESS, CREATE_DATA_ERROR, GET_DATA_ERROR, GET_DATA_SUCCESS, CREATE_NOTE_SUCCESS, DELETE_NOTE_SUCCESS } from '../actions/types';
+import { CREATE_DATA_SUCCESS, CREATE_DATA_ERROR, GET_DATA_ERROR, GET_DATA_SUCCESS, CREATE_NOTE_SUCCESS, DELETE_NOTE_SUCCESS, CREATE_LINK_SUCCESS } from '../actions/types';
 
 const initialState = {
     userId: null,
@@ -27,16 +27,27 @@ export default function(state = initialState, action) {
                 isLoading: false
             }
         case CREATE_NOTE_SUCCESS:
-            console.log(payload)
             return {
                 ...state,
                 notes: [payload, ...state.notes],
+                isLoading: false
+            }
+        case CREATE_LINK_SUCCESS:
+            return {
+                ...state,
+                links: [payload, ...state.links],
                 isLoading: false
             }
         case DELETE_NOTE_SUCCESS:
             return {
                 ...state,
                 notes: state.notes.filter(note => note._id !== payload),
+                isLoading: false
+            }
+        case DELETE_NOTE_SUCCESS:
+            return {
+                ...state,
+                links: state.links.filter(link => link._id !== payload),
                 isLoading: false
             }
         case CREATE_DATA_ERROR:
