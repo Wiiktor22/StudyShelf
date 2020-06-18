@@ -18,7 +18,8 @@ router.post('/', auth, async (req, res) => {
     const userDataFields = {
         userId: req.user.id,
         notes: [],
-        links: []
+        links: [],
+        videos: []
     }
 
     try {
@@ -135,6 +136,37 @@ router.delete('/link/:id', auth, async (req, res) => {
         return res.status(200).json(userDataStorage);
     } catch (error) {
         console.error(error.message);
+        res.status(500).send('Server error');
+    }
+})
+
+// @route   PUT api/userdata/link
+// @desc    Create new link
+// @access  Private
+router.put('/video', [
+    auth,
+    [
+        check('link', 'Link is required').not().isEmpty(),
+        check('title', 'Title is required').not().isEmpty()
+    ]
+], async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { link, title } = req.body;
+    const newSite = { link, title};
+
+    try {
+        const userDataStorage = await UserData.findOne({ userId: req.user.id });
+
+        userDataStorage.videos.unshift(newSite);
+        await userDataStorage.save();
+
+        res.json(userDataStorage);
+    } catch (error) {
+        console.error(error);
         res.status(500).send('Server error');
     }
 })

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 import { theme } from '../../themes/StylesVariables';
 import { connect } from 'react-redux';
@@ -90,14 +90,12 @@ const Icon = styled.img`
 `;
 
 const CategoryWrapper = ({ title, links, deleteMode, hideDeleteMode, deleteLink }) => {
-    const [dame, forceUpdate] = useState(false);
     const filterArray = links.filter(link => link.category === title);
     const emptyText = `There is no ${title}s saved!`;
 
     const handleDelete = id => {
         deleteLink(id);
         hideDeleteMode();
-        forceUpdate(!dame);
     }
 
     const renderContect = () => {

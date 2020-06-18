@@ -11,7 +11,7 @@ const Button = styled.button`
     padding: 7px 0;
     width: 180px;
     transition: .4s;
-
+    
     ${({ notes }) => (
         notes && css`
             border-radius: 15px;
@@ -31,6 +31,13 @@ const Button = styled.button`
         sites && css`
             border-radius: 15px;
             margin-right: 3vw;
+        `
+    )}
+
+    ${({ yellow }) => (
+        yellow && css`
+            margin-top: 7vh;
+            background-color: ${theme.yellow};
         `
     )}
 `;

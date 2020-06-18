@@ -3,39 +3,42 @@ import { theme } from '../../themes/StylesVariables';
 
 export const Wrapper = styled.div`
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: ${({ isOpen }) => isOpen ? 'translate(-50%, -50%)' : 'translate(-50%, -200%)'};
-    height: 50vh;
-    width: 30vw;
-    background-color: black;
-    border-radius: 15px;
+    top: 6vh;
+    bottom: 0;
+    right: -20vw;
+    display: flex;
+    border-top: 3px solid ${theme.yellow};
+    border-left: 3px solid ${theme.yellow};
+    transform: ${({ isOpen }) => isOpen ? 'translateX(-20vw)' : 'translateX(0)'};
+    width: 20vw;
     background-color: white;
-    border: ${({ isOpen }) => isOpen ? `1.5px solid ${theme.main}` : 'none'};
-    transition: transform .6s ease-in-out, border .05s .55s linear;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 10;
+    transition: .6s ease-in-out;
 `;
 
 export const ExitButton = styled.img`
     position: absolute;
     top: 2vh;
     right: 1vw;
-    width: 22px;
-    height: 22px;
+    width: 36px;
+    height: 36px;
     cursor: pointer;
 `;
 
 export const FlexWrapper = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: flex-start;
     padding: 2vh 1vw;
 `;
 
 export const Header = styled.h4`
-    color: ${theme.main};
-    font-size: 2rem;
-    margin-bottom: 5vh;
+    color: ${theme.yellow};
+    font-size: 2.6rem;
+    margin-bottom: 7vh;
 `;
 
 export const Label = styled.label`
@@ -48,7 +51,7 @@ export const Input = styled.input`
     display: block;
     background-color: #fafafa;
     border: none;
-    border-bottom: 2px solid ${theme.main};
+    border-bottom: 2px solid ${theme.yellow};
     padding: 7px 12px;
     font-size: 1.3rem;
     font-family: 'Montserrat', sans-serif;
@@ -59,11 +62,11 @@ export const Input = styled.input`
 export const Select = styled.select`
     background-color: #fafafa;
     border: none;
-    border-bottom: 2px solid ${theme.main};
+    border-bottom: 2px solid ${theme.yellow};
     padding: 7px 12px;
     font-size: 1.3rem;
     font-family: 'Montserrat', sans-serif;
-    margin-bottom: 3vh;
+    margin-bottom: 4vh;
     width: 50%;
 `;
 
@@ -71,7 +74,7 @@ export const TextArea = styled.textarea`
     display: block;
     background-color: #fafafa;
     border: none;
-    border-bottom: 2px solid ${theme.main};
+    border-bottom: 2px solid ${theme.yellow};
     padding: 7px 12px;
     font-size: 1.3rem;
     font-family: 'Montserrat', sans-serif;
@@ -86,11 +89,9 @@ export const Content = styled.p`
 
     ${({ date }) => (
         date && css`
-            position: absolute;
-            left: 1vw;
-            bottom: 2vh;
-            color: ${theme.main};
-            font-size: 1.1rem;
+            margin-top: 4vh;
+            color: ${theme.yellow};
+            font-size: 1.2rem;
         `
     )}
 `;

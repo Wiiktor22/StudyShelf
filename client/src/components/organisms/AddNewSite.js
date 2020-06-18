@@ -39,7 +39,7 @@ const AddNewSite = ({ switchForm, isOpen, addNewLink }) => {
                     <option value="website">website</option>
                     <option value="other">other</option>
                 </Select>
-                <Button notes onClick={e => handleSubmit(e)}>create new link</Button>
+                <Button notes yellow onClick={e => handleSubmit(e)}>create new link</Button>
             </FlexWrapper>
         </Wrapper>    
     );

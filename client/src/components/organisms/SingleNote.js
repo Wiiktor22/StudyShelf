@@ -75,7 +75,7 @@ const SingleNote = ({ title, content, date, id, deleteMode, deleteNote, hideDele
     return ( 
         <NoteWrapper>
             <Header>{title}</Header>
-            <Content>{content}</Content>
+            <Content>{content.slice(0, 550)}...</Content>
             <DownMenu>
                 <Button note onClick={() => handleClick(id)}>read more...</Button>
                 <Content date>{date.slice(0, 10)}</Content>

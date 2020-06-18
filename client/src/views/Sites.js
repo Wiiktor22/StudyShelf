@@ -55,17 +55,17 @@ const Sites = () => {
                 <Label htmlfor="delete">Read</Label>
             </SitesHeader>
             <GridWrapper>
-            <Animated animationIn="bounceInDown" animationInDuration={animationTime} isVisible={true}> 
-                <CategoryWrapper title="article" deleteMode={deleteMode} hideDeleteMode={hideDeleteMode}/>
-            </Animated>
-            <Animated animationIn="bounceInDown" animationInDuration={animationTime} animationInDelay={animationTime / 2} isVisible={true}> 
-                <CategoryWrapper title="e-book" deleteMode={deleteMode} hideDeleteMode={hideDeleteMode}/>
+                <Animated animationIn="bounceInDown" animationInDuration={animationTime} isVisible={true}> 
+                    <CategoryWrapper title="article" deleteMode={deleteMode} hideDeleteMode={hideDeleteMode}/>
                 </Animated>
-            <Animated animationIn="bounceInDown" animationInDuration={animationTime} animationInDelay={animationTime} isVisible={true}> 
-                <CategoryWrapper title="website" deleteMode={deleteMode} hideDeleteMode={hideDeleteMode}/>
+                <Animated animationIn="bounceInDown" animationInDuration={animationTime} animationInDelay={animationTime / 2} isVisible={true}> 
+                    <CategoryWrapper title="e-book" deleteMode={deleteMode} hideDeleteMode={hideDeleteMode}/>
                 </Animated>
-            <Animated animationIn="bounceInDown" animationInDuration={animationTime} animationInDelay={animationTime * 1.5} isVisible={true}> 
-                <CategoryWrapper title="other" deleteMode={deleteMode} hideDeleteMode={hideDeleteMode}/>
+                <Animated animationIn="bounceInDown" animationInDuration={animationTime} animationInDelay={animationTime} isVisible={true}> 
+                    <CategoryWrapper title="website" deleteMode={deleteMode} hideDeleteMode={hideDeleteMode}/>
+                </Animated>
+                <Animated animationIn="bounceInDown" animationInDuration={animationTime} animationInDelay={animationTime * 1.5} isVisible={true}> 
+                    <CategoryWrapper title="other" deleteMode={deleteMode} hideDeleteMode={hideDeleteMode}/>
                 </Animated>
             </GridWrapper>
             <AddNewSite 

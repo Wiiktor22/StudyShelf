@@ -43,7 +43,7 @@ const ShowNoteWindow = ({ isOpen, switchForm, read, addNewNote, note }) => {
                     <Input type="text" id="title" required onChange={e => handleChange(e)} value={newNote.title}/>
                     <Label htmlfor="title">content</Label>
                     <TextArea id="content" required onChange={e => handleChange(e)} value={newNote.content}/>
-                    <Button notes onClick={e => handleSubmit(e)}>create new note</Button>
+                    <Button notes yellow onClick={e => handleSubmit(e)}>create new note</Button>
                 </FlexWrapper>
             )
         }

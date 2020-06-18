@@ -12,6 +12,7 @@ import MainWrapper from './components/molecules/MainWrapper';
 import Notes from './views/Notes';
 import { getUserData } from './redux/actions/userData';
 import Sites from './views/Sites';
+import Videos from './views/Videos';
 
 if (localStorage.token) {
     setAuthToken(localStorage.token);
@@ -31,6 +32,7 @@ const App = ({ isLoading }) => {
                 <MainWrapper>
                     <Route path='/notes' component={Notes} />
                     <Route path='/sites' component={Sites} />
+                    <Route path='/videos' component={Videos} />
                 </MainWrapper>
             </Switch>
         )
