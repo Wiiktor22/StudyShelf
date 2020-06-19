@@ -76,38 +76,38 @@ const Notes = ({ notes }) => {
 
     return (
         <Animated animationIn="bounceInDown" isVisible={true}>
-        <ContentWrapper>
-            <NotesHeader>
-                <Button notes onClick={handleAddButtonClick}>add note</Button>
-                <SearchInput placeholder="search by title" value={searchedValue} onChange={(e) => setSearchedValue(e.target.value)}/>
-                <CheckBox id="delete" type="checkbox" onChange={() => setDeleteMode(!deleteMode)} checked={deleteMode}/>
-                <Label htmlfor="delete">Delete</Label>
-            </NotesHeader>
-            <NotesWrapper>
-                {
-                    filterNotes.map(note => (
-                        <SingleNote
-                            id={note._id}
-                            key={note._id}
-                            title={note.title}
-                            content={note.content}
-                            date={note.date}
-                            deleteMode={deleteMode}
-                            hideDeleteMode={hideDeleteMode}
-                            switchRead={switchRead}
-                            switchForm={switchForm}
-                            selectNote={selectNote}
-                        />
-                    ))
-                }
-            </NotesWrapper>
-            <ShowNoteWindow 
-                isOpen={showForm}
-                switchForm={switchForm}
-                read={willRead}
-                note={readenNote}
-            />
-        </ContentWrapper>
+            <ContentWrapper>
+                <NotesHeader>
+                    <Button notes onClick={handleAddButtonClick}>add note</Button>
+                    <SearchInput placeholder="search by title" value={searchedValue} onChange={(e) => setSearchedValue(e.target.value)}/>
+                    <CheckBox id="delete" type="checkbox" onChange={() => setDeleteMode(!deleteMode)} checked={deleteMode}/>
+                    <Label htmlfor="delete">Delete</Label>
+                </NotesHeader>
+                <NotesWrapper>
+                    {
+                        filterNotes.map(note => (
+                            <SingleNote
+                                id={note._id}
+                                key={note._id}
+                                title={note.title}
+                                content={note.content}
+                                date={note.date}
+                                deleteMode={deleteMode}
+                                hideDeleteMode={hideDeleteMode}
+                                switchRead={switchRead}
+                                switchForm={switchForm}
+                                selectNote={selectNote}
+                            />
+                        ))
+                    }
+                </NotesWrapper>
+                <ShowNoteWindow 
+                    isOpen={showForm}
+                    switchForm={switchForm}
+                    read={willRead}
+                    note={readenNote}
+                />
+            </ContentWrapper>
         </Animated>
     );
 }

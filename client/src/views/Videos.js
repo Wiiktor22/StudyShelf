@@ -5,6 +5,7 @@ import AddNewSite from '../components/organisms/AddNewSite';
 import { connect } from 'react-redux';
 import SingleVideo from '../components/organisms/SingleVideo';
 import CheckBox from '../components/atoms/CheckBox';
+import { Animated } from 'react-animated-css';
 
 const ContentWrapper = styled.div`
     position: relative;
@@ -44,33 +45,35 @@ const Videos = ({ videos }) => {
     const hideDeleteMode = () => setDeleteMode(false);
     
     return ( 
-        <ContentWrapper>
-            <VideosHeader>
-                <Button sites onClick={switchForm}>add video</Button>
-                <CheckBox id="delete" type="checkbox" checked={deleteMode} onChange={() => setDeleteMode(!deleteMode)}/>
-                <Label htmlfor="delete">Delete</Label>
-            </VideosHeader>
-            <GridWrapper>
-                {
-                    videos.map(video => (
-                        <SingleVideo 
-                            key={video._id}
-                            id={video._id}
-                            link={video.link}
-                            title={video.title}
-                            date={video.date}
-                            deleteMode={deleteMode}
-                            hideDeleteMode={hideDeleteMode}
-                        />
-                    ))
-                }
-            </GridWrapper>
-            <AddNewSite 
-                isOpen={formIsOpen}
-                switchForm={switchForm}
-                type="videos"
-            />
-        </ContentWrapper>
+        <Animated animationIn="bounceInDown" isVisible={true}>
+            <ContentWrapper>
+                <VideosHeader>
+                    <Button sites onClick={switchForm}>add video</Button>
+                    <CheckBox id="delete" type="checkbox" checked={deleteMode} onChange={() => setDeleteMode(!deleteMode)}/>
+                    <Label htmlfor="delete">Delete</Label>
+                </VideosHeader>
+                <GridWrapper>
+                    {
+                        videos.map(video => (
+                            <SingleVideo 
+                                key={video._id}
+                                id={video._id}
+                                link={video.link}
+                                title={video.title}
+                                date={video.date}
+                                deleteMode={deleteMode}
+                                hideDeleteMode={hideDeleteMode}
+                            />
+                        ))
+                    }
+                </GridWrapper>
+                <AddNewSite 
+                    isOpen={formIsOpen}
+                    switchForm={switchForm}
+                    type="videos"
+                />
+            </ContentWrapper>
+        </Animated>
     );
 }
 

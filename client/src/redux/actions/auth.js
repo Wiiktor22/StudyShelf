@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { REGISTER_SUCCESS, REGISTER_ERROR, USER_LOADED, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_ERROR, LOG_OUT } from './types';
 import setAuthToken from '../setAutkToken';
-import { createUserData, getUserData } from './userData';
+import { createUserData, getUserData, clearUserData } from './userData';
 
 export const loadUser = () => async dispatch => {
     if (localStorage.token) {
@@ -73,5 +73,6 @@ export const login = (email, password) => async dispatch => {
 }
 
 export const logout = () => async dispatch => {
+    dispatch(clearUserData());
     dispatch({ type: LOG_OUT });
 }

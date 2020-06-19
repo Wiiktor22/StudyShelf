@@ -1,4 +1,4 @@
-import { CREATE_DATA_SUCCESS, CREATE_DATA_ERROR, GET_DATA_ERROR, GET_DATA_SUCCESS, CREATE_NOTE_SUCCESS, DELETE_NOTE_SUCCESS, CREATE_LINK_SUCCESS, CREATE_VIDEO_SUCCESS, DELETE_VIDEO_SUCCESS, DELETE_LINK_SUCCESS } from '../actions/types';
+import { CREATE_DATA_SUCCESS, CREATE_DATA_ERROR, GET_DATA_ERROR, GET_DATA_SUCCESS, CREATE_NOTE_SUCCESS, DELETE_NOTE_SUCCESS, CREATE_LINK_SUCCESS, CREATE_VIDEO_SUCCESS, DELETE_VIDEO_SUCCESS, DELETE_LINK_SUCCESS, CLEAR_USERDATA } from '../actions/types';
 
 const initialState = {
     userId: null,
@@ -69,6 +69,14 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 userId: null,
+                isLoading: false
+            }
+        case CLEAR_USERDATA:
+            return {
+                userId: null,
+                notes: [],
+                links: [],
+                videos: [],
                 isLoading: false
             }
         default:

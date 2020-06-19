@@ -53,7 +53,6 @@ const Header = ({ name, lastName, logout }) => {
     return ( 
         <Wrapper>
             <Info page>{page} page</Info>
-            <Info>{name} {lastName}</Info>
             <Button onClick={logout}>Log out</Button>
         </Wrapper>
     );
