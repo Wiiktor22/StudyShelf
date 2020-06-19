@@ -67,7 +67,7 @@ export const Select = styled.select`
     font-size: 1.3rem;
     font-family: 'Montserrat', sans-serif;
     margin-bottom: 4vh;
-    width: 50%;
+    width: 70%;
 `;
 
 export const TextArea = styled.textarea`

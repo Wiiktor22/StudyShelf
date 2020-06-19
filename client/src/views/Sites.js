@@ -71,6 +71,7 @@ const Sites = () => {
             <AddNewSite 
                 isOpen={formIsOpen}
                 switchForm={switchForm}
+                type="sites"
             />
         </ContentWrapper>
     );

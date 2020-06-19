@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CREATE_DATA_SUCCESS, CREATE_DATA_ERROR, GET_DATA_SUCCESS, GET_DATA_ERROR, CREATE_NOTE_SUCCESS, CREATE_NOTE_ERROR, DELETE_NOTE_SUCCESS, DELETE_NOTE_ERROR, CREATE_LINK_SUCCESS, CREATE_LINK_ERROR, DELETE_LINK_ERROR, DELETE_LINK_SUCCESS } from '../actions/types';
+import { CREATE_DATA_SUCCESS, CREATE_DATA_ERROR, GET_DATA_SUCCESS, GET_DATA_ERROR, CREATE_NOTE_SUCCESS, CREATE_NOTE_ERROR, DELETE_NOTE_SUCCESS, DELETE_NOTE_ERROR, CREATE_LINK_SUCCESS, CREATE_LINK_ERROR, DELETE_LINK_ERROR, DELETE_LINK_SUCCESS, CREATE_VIDEO_ERROR, CREATE_VIDEO_SUCCESS, DELETE_VIDEO_ERROR, DELETE_VIDEO_SUCCESS } from '../actions/types';
 
 export const createUserData = () => async dispatch => {
     try {
@@ -97,6 +97,42 @@ export const deleteLink = id => async dispatch => {
     } catch (error) {
         dispatch({
             type: DELETE_LINK_ERROR
+        })
+    }
+}
+
+export const addNewVideo = newVideo => async dispatch => {
+    const config = {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+    };
+    
+    try {
+        const res = await axios.put('/api/userdata/video', newVideo, config);
+        dispatch({
+            type: CREATE_VIDEO_SUCCESS,
+            payload: res.data.videos[0]
+        })
+    } catch (error) {
+        dispatch({
+            type: CREATE_VIDEO_ERROR
+        })
+    }
+}
+
+export const deleteVideo = id => async dispatch => {
+    try {
+        await axios.delete(`/api/userdata/video/${id}`)
+        
+        dispatch({
+            type: DELETE_VIDEO_SUCCESS,
+            payload: id
+        })
+    } catch (error) {
+        console.log(error)
+        dispatch({
+            type: DELETE_VIDEO_ERROR
         })
     }
 }

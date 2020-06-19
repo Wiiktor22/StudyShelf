@@ -131,7 +131,7 @@ router.delete('/link/:id', auth, async (req, res) => {
     try {
         const userDataStorage = await UserData.findOne({ userId: req.user.id });
 
-        userDataStorage.links = userDataStorage.links.filter(note => note._id.toString() !== req.params.id);
+        userDataStorage.links = userDataStorage.links.filter(link => link._id.toString() !== req.params.id);
         await userDataStorage.save();
         return res.status(200).json(userDataStorage);
     } catch (error) {
@@ -146,8 +146,7 @@ router.delete('/link/:id', auth, async (req, res) => {
 router.put('/video', [
     auth,
     [
-        check('link', 'Link is required').not().isEmpty(),
-        check('title', 'Title is required').not().isEmpty()
+        check('link', 'Link is required').not().isEmpty()
     ]
 ], async (req, res) => {
     const errors = validationResult(req);
@@ -155,8 +154,8 @@ router.put('/video', [
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { link, title } = req.body;
-    const newSite = { link, title};
+    const { link } = req.body;
+    const newSite = { link };
 
     try {
         const userDataStorage = await UserData.findOne({ userId: req.user.id });
@@ -167,6 +166,22 @@ router.put('/video', [
         res.json(userDataStorage);
     } catch (error) {
         console.error(error);
+        res.status(500).send('Server error');
+    }
+})
+
+// @route   DELETE api/userdata/video:id
+// @desc    Delete saved video
+// @access  Private
+router.delete('/video/:id', auth, async (req, res) => {
+    try {
+        const userDataStorage = await UserData.findOne({ userId: req.user.id });
+
+        userDataStorage.videos = userDataStorage.videos.filter(video => video._id.toString() !== req.params.id);
+        await userDataStorage.save();
+        return res.status(200).json(userDataStorage);
+    } catch (error) {
+        console.error(error.message);
         res.status(500).send('Server error');
     }
 })

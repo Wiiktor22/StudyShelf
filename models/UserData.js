@@ -44,10 +44,6 @@ const UserDataSchema = new mongoose.Schema({
     ],
     videos: [
         {
-            title: {
-                type: String,
-                required: true
-            },
             link: {
                 type: String,
                 required: true
