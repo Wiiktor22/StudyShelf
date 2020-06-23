@@ -16,6 +16,33 @@ export const Wrapper = styled.div`
     justify-content: center;
     z-index: 10;
     transition: .6s ease-in-out;
+
+    @media (max-width: 1366px) {
+        width: 27vw;
+        right: -27vw;
+        transform: ${({ isOpen }) => isOpen ? 'translateX(-27vw)' : 'translateX(0)'};
+    }
+    @media (max-width: 1024px) {
+        width: 30vw;
+        right: -30vw;
+        transform: ${({ isOpen }) => isOpen ? 'translateX(-30vw)' : 'translateX(0)'};
+    }
+    @media (max-width: 768px) {
+        top: 8vh;
+        width: 45vw;
+        right: -45vw;
+        transform: ${({ isOpen }) => isOpen ? 'translateX(-45vw)' : 'translateX(0)'};
+    }
+    @media (max-width: 420px) {
+        width: 75vw;
+        right: -75vw;
+        transform: ${({ isOpen }) => isOpen ? 'translateX(-75vw)' : 'translateX(0)'};
+    }
+    @media (max-width: 400px) {
+        width: 80vw;
+        right: -80vw;
+        transform: ${({ isOpen }) => isOpen ? 'translateX(-80vw)' : 'translateX(0)'};
+    }
 `;
 
 export const ExitButton = styled.img`
@@ -33,6 +60,13 @@ export const FlexWrapper = styled.div`
     justify-content: center;
     align-items: flex-start;
     padding: 2vh 1vw;
+
+    @media (max-width: 1024px) {
+        padding: 2vh 1.8vw;
+    }
+    @media (max-width: 420px) {
+        padding: 2vh 3vw;
+    }
 `;
 
 export const Header = styled.h4`

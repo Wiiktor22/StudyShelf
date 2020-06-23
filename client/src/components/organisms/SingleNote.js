@@ -18,6 +18,20 @@ const NoteWrapper = styled.div`
     :hover {
         box-shadow: 0 0 10px rgba(33,33,33, .2);
     }
+
+    @media (max-width: 1024px) {
+        width: 20vw;
+        height: 27vh;
+    }
+    @media (max-width: 768px) {
+        width: 28vw;
+        height: 25vh;
+    }
+    @media (max-width: 420px) {
+        width: 100%;
+        height: 30vh;
+        padding: 2vh 3vw;
+    }
 `;
 
 const Header = styled.h4`
@@ -25,6 +39,10 @@ const Header = styled.h4`
     font-size: 2rem;
     margin-bottom: 3vh;
     font-weight: 600;
+
+    @media (max-width: 1024px) {
+        font-size: 1.7rem;
+    }
 `;
 
 const DownMenu = styled.div`
@@ -35,6 +53,10 @@ const DownMenu = styled.div`
     justify-content: flex-start;
     align-items: center;
     width: 100%;
+
+    @media (max-width: 420px) {
+        left: 3vw;
+    }
 `;
 
 const Content = styled.p`
@@ -46,7 +68,11 @@ const Content = styled.p`
             font-size: 1.1rem;
             margin-left: 20px;
         `
-    )}
+    )};
+
+    @media (max-width: 1024px) {
+        font-size: 1.2rem;
+    }
 `;
 
 const Icon = styled.img`
@@ -58,6 +84,10 @@ const Icon = styled.img`
     height: 22px;
     transition: .2s;
     cursor: pointer;
+
+    @media (max-width: 420px) {
+        right: 5vw;
+    }
 `;
 
 const SingleNote = ({ title, content, date, id, deleteMode, deleteNote, hideDeleteMode, switchRead, switchForm, selectNote }) => {
@@ -71,11 +101,29 @@ const SingleNote = ({ title, content, date, id, deleteMode, deleteNote, hideDele
         deleteNote(id);
         hideDeleteMode();
     }
+
+    const defineTextLength = () => {
+        if (window.innerWidth > 1366) {
+            return 550
+        } else if (window.innerWidth > 1025) {
+            return 300
+        } else if (window.innerWidth > 768) {
+            return 175
+        } else if (window.innerWidth > 420) {
+            return 150
+        } else if (window.innerWidth > 400) {
+            return 350
+        } else if (window.innerWidth > 370) {
+            return 250
+        } else {
+            return 150
+        }
+    }
     
     return ( 
         <NoteWrapper>
             <Header>{title}</Header>
-            <Content>{content.slice(0, 550)}...</Content>
+            <Content>{content.slice(0, defineTextLength())}...</Content>
             <DownMenu>
                 <Button note onClick={() => handleClick(id)}>read more...</Button>
                 <Content date>{date.slice(0, 10)}</Content>

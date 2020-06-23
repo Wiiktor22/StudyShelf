@@ -9,6 +9,11 @@ const Wrapper = styled.div`
     position: relative;
     min-height: 90vh;
     margin-left: 200px;
+
+    @media (max-width: 768px) {
+        margin-left: 0;
+        margin-top: 8vh;
+    }
 `;
 
 const MainWrapper = ({ children, isAuthenticated }) => {
@@ -16,7 +21,7 @@ const MainWrapper = ({ children, isAuthenticated }) => {
     
     return ( 
         <Wrapper>
-            <Header />
+            {window.innerWidth > 800 && <Header />}
             <Nav/>
             {children}
         </Wrapper>

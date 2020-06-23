@@ -23,6 +23,15 @@ const NotesHeader = styled.div`
     position: absolute;
     top: 6vh;
     left: 4vw;
+
+    @media (max-width: 768px) {
+        top: 3vh;
+    }
+    @media (max-width: 420px) {
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+    }
 `;
 
 const SearchInput = styled.input`
@@ -34,6 +43,10 @@ const SearchInput = styled.input`
     border: none;
     border: 1.5px solid ${theme.main};
     font-family: 'Montserrat', sans-serif;
+
+    @media (max-width: 420px) {
+        margin: 0 0 1vh;
+    }
 `;
 
 const NotesWrapper = styled.div`
@@ -41,11 +54,30 @@ const NotesWrapper = styled.div`
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 5vh 3vw;
     padding: 14vh 4vw 2vh;
+
+    @media (max-width: 1366px) {
+        grid-gap: 5vh 2vw;
+    }
+    @media (max-width: 1024px) {
+        grid-gap: 3vh 1.5vw;
+    }
+    @media (max-width: 768px) {
+        padding: 10vh 4vw 2vh;
+    }
+    @media (max-width: 420px) {
+        padding: 20vh 4vw 2vh;
+        grid-template-columns: 1fr;
+    }
 `;
 
 const Label = styled.label`
     margin-left: 10px;
     font-size: 1.3rem;
+`;
+
+const InputWrapper = styled.div`
+    display: flex;
+    align-items: center;
 `;
 
 const Notes = ({ notes }) => {
@@ -80,8 +112,10 @@ const Notes = ({ notes }) => {
                 <NotesHeader>
                     <Button notes onClick={handleAddButtonClick}>add note</Button>
                     <SearchInput placeholder="search by title" value={searchedValue} onChange={(e) => setSearchedValue(e.target.value)}/>
-                    <CheckBox id="delete" type="checkbox" onChange={() => setDeleteMode(!deleteMode)} checked={deleteMode}/>
-                    <Label htmlfor="delete">Delete</Label>
+                    <InputWrapper>
+                        <CheckBox id="delete" type="checkbox" onChange={() => setDeleteMode(!deleteMode)} checked={deleteMode}/>
+                        <Label htmlfor="delete">Delete</Label>
+                    </InputWrapper>
                 </NotesHeader>
                 <NotesWrapper>
                     {

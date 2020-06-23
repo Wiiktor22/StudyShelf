@@ -12,6 +12,14 @@ const StyledLink = styled(NavLink)`
     font-weight: 600;
     padding: 1vh 0;
     width: 100%;
+
+    @media (max-width: 768px) {
+        width: auto;
+        margin-right: 3vw;
+    }
+    @media (max-width: 420px) {
+        margin-right: 1vw;
+    }
 `;
 
 const Icon = styled.img`
@@ -25,7 +33,8 @@ const MyLink = ({ component, name, icon }) => {
     
     return (
         <StyledLink exact to={linkToSite}>
-            <Icon src={icon}/>{name}
+            <Icon src={icon}/>
+            {window.innerWidth > 420 && name}
         </StyledLink>
     );
 }

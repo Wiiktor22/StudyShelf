@@ -14,16 +14,20 @@ const GlobalStyles = createGlobalStyle`
 
     body {
         font-family: 'Montserrat', sans-serif;
+        @media (max-width: 1024px) {
+            max-width: 100vw;
+        }
     }
 
     button {
         border: none;
         cursor: pointer;
+        outline: none;
     }
 
     a {
-        text-decoration:none;
-        color:inherit;
+        text-decoration: none;
+        color: inherit;
     }
 `;
 

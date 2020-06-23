@@ -40,6 +40,16 @@ const Button = styled.button`
             background-color: ${theme.yellow};
         `
     )}
+
+    @media (max-width: 420px) {
+        margin-bottom: 1vh;
+
+        ${({ note }) => (
+            note && css`
+                margin-bottom: 0;
+            `
+        )}
+    }
 `;
 
 export default Button;

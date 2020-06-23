@@ -14,6 +14,13 @@ const Logo = styled.h1`
             margin: 3vh 0 5vh;
         `
     )}
+
+    @media (max-width: 768px) {
+        margin: 0 5vw 0 3vw;
+    }
+    @media (max-width: 414px) {
+        font-size: 2rem;
+    }
 `;
 
 export default Logo;

@@ -12,6 +12,10 @@ const Wrapper = styled.div`
     grid-template-columns: 4fr 6fr;
     height: 100vh;
     width: 100%;
+
+    @media (max-width: 420px) {
+        grid-template-columns: 1fr;
+    }
 `;
 
 const Section = styled.div`
@@ -27,23 +31,48 @@ const Section = styled.div`
             background-color: ${theme.main};
         `
     )}
+
+    ${({ mobile }) => (
+        mobile && css`
+            padding: 0 5vw;
+        `
+    )}
 `;
 
 const SingIn = ({ isAuthenticated }) => {
     const [showRegister, setShowRegister] = useState(false);
     const toggle = () => {
         setShowRegister(!showRegister);
-    }
+    };
     if (isAuthenticated) { return <Redirect to='/notes' /> }
-    return ( 
-        <Wrapper>
-            <Section left>
-                <FrontPageInfo />
-            </Section>
-            <Section>
-                {showRegister ? <SignUp toggle={toggle}/> : <LogIn toggle={toggle}/>}
-            </Section>
-        </Wrapper>
+
+    const renderContent = () => {
+        if (window.innerWidth > 420) {
+            return (
+                <Wrapper>
+                    <Section left>
+                        <FrontPageInfo />
+                    </Section>
+                    <Section>
+                        {showRegister ? <SignUp toggle={toggle}/> : <LogIn toggle={toggle}/>}
+                    </Section>
+                </Wrapper>
+            )
+        } else {
+            return (
+                <Wrapper>
+                    <Section mobile>
+                        {showRegister ? <SignUp toggle={toggle}/> : <LogIn toggle={toggle}/>}
+                    </Section>
+                </Wrapper>
+            )
+        }
+    }
+
+    return (
+        <>
+            {renderContent()}
+        </>
     );
 }
 
