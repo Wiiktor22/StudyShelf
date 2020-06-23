@@ -37,6 +37,15 @@ const GridWrapper = styled.div`
     padding: 14vh 5vw 2vh;
     width: 100%;
     min-height: 90vh;
+
+    @media (max-width: 1024px) {
+        padding: 14vh 3vw 2vh;
+        grid-gap: 4vh 1.4vw;
+    }
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        grid-gap: 6vh 0;
+    }
 `;
 
 const Sites = () => {

@@ -20,6 +20,14 @@ const Wrapper = styled.div`
     :hover {
         box-shadow: 0 0 10px rgba(33,33,33, .2);
     }
+
+    @media (max-width: 768px) {
+        width: 70vw;
+        min-height: 25vh;
+    }
+    @media (max-width: 420px) {
+        width: 90vw;
+    }
 `;
 
 const Header = styled.div`

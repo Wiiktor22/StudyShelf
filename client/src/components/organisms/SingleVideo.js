@@ -11,6 +11,19 @@ const Wrapper = styled.div`
     width: 100%;
     height: 32vh;
     border-radius: 15px;
+
+    @media (max-width: 1366px) {
+        height: 27vh;
+    } 
+    @media (max-width: 1024px) {
+        height: 26vh;
+    }
+    @media (max-width: 768px) {
+        height: 22vh;
+    }
+    @media (max-width: 420px) {
+        height: auto;
+    }
 `;
 
 const ImgWrapper = styled.div`

@@ -10,7 +10,7 @@ import { Animated } from 'react-animated-css';
 const ContentWrapper = styled.div`
     position: relative;
     width: 100%;
-    height: 80vh;
+    min-height: 80vh;
     background-color: white;
     margin-top: 6vh;
 `;
@@ -26,10 +26,17 @@ const VideosHeader = styled.div`
 
 const GridWrapper = styled.div`
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(4, 1fr);
     grid-gap: 5vh 2vw;
     justify-items: center;
     padding: 14vh 4vw 2vh;
+
+    @media (max-width: 1024px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    @media (max-width: 420px) {
+        grid-template-columns: 1fr;
+    }
 `;
 
 const Label = styled.label`
